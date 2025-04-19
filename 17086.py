@@ -3,26 +3,26 @@ from collections import deque
 input = sys.stdin.readline
 
 def solution(N, M, sharks, board):
-  def find_nearst_shark(sx, sy):
+  visited = [[False]*M for _ in range(N)]
+  
+  def bfs(sx, sy):
     queue = deque([(sx, sy, 0)])
-    visited = [[False]*M for _ in range(N)]
     while queue:
       x, y, d = queue.popleft()
       for dx, dy in [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]:
         nx, ny = x+dx, y+dy
-        if not (0 <= nx < N and 0 <= ny < M) or visited[nx][ny]:
+        if not (0 <= nx < N and 0 <= ny < M):
           continue
-        
-        if board[nx][ny] == 1:
-          return d+1
-
-        visited[nx][ny] = True
-        queue.append((nx, ny, d+1))
+        if board[nx][ny] == 0 and (not visited[nx][ny] or visited[nx][ny] > d+1):
+          visited[nx][ny] = d+1
+          queue.append((nx, ny, d+1))
 
   result = 0
   for sx, sy in sharks:
-    result = max(find_nearst_shark(sx, sy), result)
-    
+    bfs(sx, sy)
+  for i in range(N):
+    result = max(result, max(visited[i]))
+  
   return result
 
 N, M = map(int, input().split())
