@@ -12,7 +12,10 @@ def solution(N, K, stuffs):
         continue
     
       # 직전 기록의 최대치 <-> 현재 물건 담고 남은 무게 중 최대치 (직전 기록) 비교
-      dp[n][k] = max(dp[n-1][k], curr_v + dp[n-1][k-curr_w])
+      if n > 0:
+        dp[n][k] = max(dp[n-1][k], curr_v + dp[n-1][k-curr_w])
+      else:
+        dp[n][k] = curr_v
 
     
   return dp[N-1][K]
