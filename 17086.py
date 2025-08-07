@@ -1,5 +1,5 @@
 import sys
-from collections import deque
+from collections import defaultdict
 input = sys.stdin.readline
 
 def solution(N, M, sharks, board):
@@ -25,9 +25,10 @@ def solution(N, M, sharks, board):
   
   return result
 
-N, M = map(int, input().split())
-sharks = []
-board = []
+N = int(input())
+peaples = map(int, input().split())
+visited = [False]*N
+graph = defaultdict(list)
 for i in range(N):
   row = list(map(int, input().split()))
   board.append(row)
