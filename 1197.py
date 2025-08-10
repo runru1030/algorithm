@@ -1,3 +1,6 @@
+# 그래프가 주어졌을 때, 그 그래프의 최소 스패닝 트리를 구하는 프로그램을 작성하시오.
+
+# 최소 스패닝 트리는, 주어진 그래프의 모든 정점들을 연결하는 부분 그래프 중에서 그 가중치의 합이 최소인 트리를 말한다.
 import sys
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
